@@ -1,5 +1,7 @@
-var stopAtSeconds = 600;
+var stopAtSeconds = 60 * 40;
+var isRunning = true;
 var secondsRemain = stopAtSeconds;
+
 
 function alertFunction() {
     secondsRemain = stopAtSeconds;
@@ -11,8 +13,27 @@ function setRemainTime() {
     element.innerHTML = "" + parseInt(secondsRemain/60) + "分" + secondsRemain % 60 + "秒";
 }
 
+function decreaseRemainTime() {
+	if (isRunning == true){
+		secondsRemain = secondsRemain -1;
+	} 
+}
+
+function stopCount(){
+	isRunning = false;
+}
+
+function resume(){
+	isRunning = true;
+}
+
+function restart(){
+	secondsRemain = stopAtSeconds;
+	resume();
+}
+
 setInterval(function () {
-    secondsRemain = secondsRemain - 1;
+    decreaseRemainTime();
     setRemainTime();
 }, 1000);
 
